@@ -1,5 +1,10 @@
 import app from "./app";
+import config from "./config";
 
-app.listen(5000, () => {
-  console.log("Server is running on Port 5000");
-});
+if (config.NODE_ENV !== "production") {
+  app.listen(config.PORT, () => {
+    console.log(`Server is running on Port ${config.PORT}`);
+  });
+}
+
+export default app;
