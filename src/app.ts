@@ -1,4 +1,5 @@
 import express, { type Application } from "express";
+import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 
 const app: Application = express();
 
@@ -12,4 +13,5 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use(globalErrorHandler);
 export default app;
