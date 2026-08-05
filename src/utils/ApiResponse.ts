@@ -1,11 +1,13 @@
 export class ApiResponse<T> {
-  success: boolean;
+  success = true;
   message: string;
-  data?: T | undefined;
+  data?: T;
 
-  constructor(message: string, data?: T | undefined) {
-    this.success = true;
+  constructor(message: string, data?: T) {
     this.message = message;
-    this.data = data;
+
+    if (data !== undefined) {
+      this.data = data;
+    }
   }
 }
