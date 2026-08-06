@@ -1,12 +1,30 @@
 import { Router } from "express";
-import { validate } from "../../middlewares/validate";
+
 import { authenticate, authorize } from "../../middlewares/auth";
-import { gearValidation } from "./gear.validation";
+
+import { validate } from "../../middlewares/validate";
+
 import { gearController } from "./gear.controller";
+import { gearValidation } from "./gear.validation";
 
 const router = Router();
 
-// Provider only
+// Public Routes
+
+router.get(
+  "/gear",
+  validate(gearValidation.getGearQuerySchema),
+  gearController.getAllGear,
+);
+
+router.get(
+  "/gear/:id",
+  validate(gearValidation.gearIdParamSchema),
+  gearController.getGearById,
+);
+
+// Provider Routes
+
 router.post(
   "/provider/gear",
   authenticate,
@@ -15,12 +33,27 @@ router.post(
   gearController.createGear,
 );
 
+router.get(
+  "/provider/gear",
+  authenticate,
+  authorize("PROVIDER"),
+  gearController.getProviderGear,
+);
+
 router.put(
   "/provider/gear/:id",
   authenticate,
   authorize("PROVIDER"),
   validate(gearValidation.updateGearSchema),
   gearController.updateGear,
+);
+
+router.delete(
+  "/provider/gear/:id",
+  authenticate,
+  authorize("PROVIDER"),
+  validate(gearValidation.gearIdParamSchema),
+  gearController.deleteGear,
 );
 
 export default router;

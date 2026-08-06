@@ -1,5 +1,7 @@
 import express, { type Application } from "express";
 import authRoutes from "./modules/auth/auth.route";
+import categoryRoutes from "./modules/category/category.route";
+import gearRoutes from "./modules/gear/gear.route";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 
 const app: Application = express();
@@ -15,6 +17,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api", categoryRoutes);
+app.use("/api", gearRoutes);
 
 app.use(globalErrorHandler);
 

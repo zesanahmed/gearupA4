@@ -1,15 +1,17 @@
-import type { NextFunction, Request, Response } from "express";
-import type { ZodType } from "zod";
+import { z } from "zod";
+import type { Request, Response, NextFunction } from "express";
 
 export const validate =
-  (schema: ZodType) => (req: Request, res: Response, next: NextFunction) => {
+  <T extends z.ZodType>(schema: T) =>
+  (req: Request, res: Response, next: NextFunction) => {
     try {
-      schema.parse({
+      const parsed = schema.parse({
         body: req.body,
         query: req.query,
         params: req.params,
       });
 
+      req.validated = parsed;
       next();
     } catch (err) {
       next(err);

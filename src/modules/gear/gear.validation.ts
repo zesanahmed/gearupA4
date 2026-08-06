@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { Prisma } from "../../generated/prisma/client";
 
 //Create Gear
 
@@ -90,9 +91,22 @@ const getGearQuerySchema = z.object({
     .strict(),
 });
 
-export type CreateGearInput = z.infer<typeof createGearSchema>["body"];
+export type CreateGearInput = Omit<
+  z.infer<typeof createGearSchema>["body"],
+  "specs"
+> & {
+  specs?: Prisma.InputJsonValue;
+};
 
-export type UpdateGearInput = z.infer<typeof updateGearSchema>["body"];
+export type UpdateGearInput = Omit<
+  z.infer<typeof updateGearSchema>["body"],
+  "specs"
+> & {
+  specs?: Prisma.InputJsonValue;
+};
+// export type CreateGearInput = z.infer<typeof createGearSchema>["body"];
+
+// export type UpdateGearInput = z.infer<typeof updateGearSchema>["body"];
 
 export type GetGearQuery = z.infer<typeof getGearQuerySchema>["query"];
 

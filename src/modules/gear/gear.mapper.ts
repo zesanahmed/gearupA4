@@ -1,8 +1,58 @@
-import type { UpdateGearInput } from "./gear.validation";
+import type { Prisma } from "../../generated/prisma/client";
+import type { CreateGearInput, UpdateGearInput } from "./gear.validation";
 
-export const buildUpdateGearData = (payload: UpdateGearInput) => ({
+/**
+ * Build Prisma create input for GearItem
+ */
+export const buildCreateGearData = (
+  providerId: string,
+  payload: CreateGearInput,
+): Prisma.GearItemCreateInput => ({
+  provider: {
+    connect: {
+      id: providerId,
+    },
+  },
+
+  category: {
+    connect: {
+      id: payload.categoryId,
+    },
+  },
+
+  name: payload.name,
+
+  pricePerDay: payload.pricePerDay,
+
+  stock: payload.stock,
+
+  images: payload.images,
+
+  ...(payload.brand !== undefined && {
+    brand: payload.brand,
+  }),
+
+  ...(payload.description !== undefined && {
+    description: payload.description,
+  }),
+
+  ...(payload.specs !== undefined && {
+    specs: payload.specs,
+  }),
+});
+
+/**
+ * Build Prisma update input for GearItem
+ */
+export const buildUpdateGearData = (
+  payload: UpdateGearInput,
+): Prisma.GearItemUpdateInput => ({
   ...(payload.categoryId !== undefined && {
-    categoryId: payload.categoryId,
+    category: {
+      connect: {
+        id: payload.categoryId,
+      },
+    },
   }),
 
   ...(payload.name !== undefined && {
@@ -34,6 +84,8 @@ export const buildUpdateGearData = (payload: UpdateGearInput) => ({
   }),
 
   ...(payload.images !== undefined && {
-    images: payload.images,
+    images: {
+      set: payload.images,
+    },
   }),
 });
