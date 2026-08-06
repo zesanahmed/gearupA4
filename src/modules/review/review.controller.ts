@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
-import { catchAsync } from "../utils/catchAsync";
-import { ApiResponse } from "../utils/ApiResponse";
+import { catchAsync } from "../../utils/catchAsync";
+import { ApiResponse } from "../../utils/ApiResponse";
 import { reviewService } from "./review.service";
 import type { CreateReviewInput } from "./review.validation";
 
