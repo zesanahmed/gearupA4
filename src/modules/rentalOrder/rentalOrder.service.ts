@@ -17,8 +17,6 @@ import type {
   UpdateOrderStatusInput,
 } from "./rentalOrder.validation";
 
-// ---- Shared ownership/access helpers (DRY) ----
-
 const getOwnOrderOrThrow = async (orderId: string, customerId: string) => {
   const order = await prisma.rentalOrder.findUnique({
     where: { id: orderId },
@@ -72,7 +70,6 @@ const createRentalOrder = async (
     throw new ApiError(404, "One or more gear items were not found");
   }
 
-  // Simplification: এক অর্ডারে সব item একই provider-এর হতে হবে
   const uniqueProviders = new Set(gearItems.map((g) => g.providerId));
   if (uniqueProviders.size > 1) {
     throw new ApiError(
@@ -107,7 +104,6 @@ const createRentalOrder = async (
   const rentalDays = calculateRentalDays(payload.startDate, payload.endDate);
   const totalAmount = calculateTotalAmount(resolvedItems, rentalDays);
 
-  // Transaction: order তৈরি + stock একসাথে কমানো — একটা fail করলে দুটোই rollback হবে
   const order = await prisma.$transaction(async (tx) => {
     const created = await tx.rentalOrder.create({
       data: buildRentalOrderCreateData(
@@ -151,7 +147,6 @@ const getProviderOrders = async (providerId: string) => {
   });
 };
 
-// একজন ইউজার (customer বা provider, যেই হোক) নিজের সাথে সম্পর্কিত order দেখতে পারবে
 const getOrderByIdForUser = async (
   orderId: string,
   userId: string,
@@ -213,7 +208,6 @@ const cancelOrder = async (customerId: string, orderId: string) => {
     );
   }
 
-  // Transaction: cancel + stock ফেরত দেওয়া একসাথে
   return prisma.$transaction(async (tx) => {
     const cancelled = await tx.rentalOrder.update({
       where: { id: orderId },
@@ -232,6 +226,13 @@ const cancelOrder = async (customerId: string, orderId: string) => {
   });
 };
 
+const markOrderAsPaid = async (orderId: string) => {
+  return prisma.rentalOrder.update({
+    where: { id: orderId },
+    data: { status: "PAID" },
+  });
+};
+
 export const rentalOrderService = {
   createRentalOrder,
   getCustomerOrders,
@@ -239,4 +240,5 @@ export const rentalOrderService = {
   getOrderByIdForUser,
   updateOrderStatus,
   cancelOrder,
+  markOrderAsPaid,
 };
