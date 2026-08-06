@@ -5,6 +5,7 @@ import gearRoutes from "./modules/gear/gear.route";
 import rentalOrderRoutes from "./modules/rentalOrder/rentalOrder.route";
 import paymentWebhookRoutes from "./modules/payment/payment.webhook.route";
 import paymentRoutes from "./modules/payment/payment.route";
+import reviewRoutes from "./modules/payment/payment.route";
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 
 const app: Application = express();
@@ -26,6 +27,7 @@ app.use("/api", categoryRoutes);
 app.use("/api", gearRoutes);
 app.use("/api", rentalOrderRoutes);
 app.use("/api", paymentRoutes);
+app.use("/api", reviewRoutes);
 
 app.use(globalErrorHandler);
 
