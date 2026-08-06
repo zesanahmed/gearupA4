@@ -9,7 +9,8 @@
     "deploy": "vercel --prod",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
-    "db:seed": "prisma db seed"
+    "db:seed": "prisma db seed",
+    "webhook:stripe": "stripe listen --forward-to localhost:5000/api/payments/confirm"
   },
   "keywords": [],
   "author": "",
