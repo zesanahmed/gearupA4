@@ -17,8 +17,8 @@ const envSchema = z.object({
   STRIPE_CURRENCY: z.string().default("usd"),
   CLIENT_SUCCESS_URL: z
     .string()
-    .default("http://localhost:3000/payment/success"),
-  CLIENT_CANCEL_URL: z.string().default("http://localhost:3000/payment/cancel"),
+    .default("http://localhost:5000/payment/success"),
+  CLIENT_CANCEL_URL: z.string().default("http://localhost:5000/payment/cancel"),
 });
 
 const parsed = envSchema.safeParse(process.env);
