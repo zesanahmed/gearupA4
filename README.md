@@ -8,7 +8,7 @@ Built for Programming Hero's **Next Level AI-Driven Software Engineering Bootcam
 
 ## 🚀 Live Deployment
 
-- **API Base URL:** `https://gear-up-a4-gamma.vercel.app/`
+- **API Base URL:** https://gear-up-a4-gamma.vercel.app/
 - **GitHub Repo:** https://github.com/zesanahmed/gearupA4
 
 ---
