@@ -8,17 +8,17 @@ Built for Programming Hero's **Next Level AI-Driven Software Engineering Bootcam
 
 ## 🚀 Live Deployment
 
-- **API Base URL:** `https://<your-vercel-project>.vercel.app`
+- **API Base URL:** `https://gear-up-a4-gamma.vercel.app/`
 - **GitHub Repo:** https://github.com/zesanahmed/gearupA4
 
 ---
 
 ## 🔑 Admin Credentials
 
-| Field | Value |
-|---|---|
-| Email | `admin@gearup.com` |
-| Password | `Admin@123456` |
+| Field    | Value              |
+| -------- | ------------------ |
+| Email    | `admin@gearup.com` |
+| Password | `Admin@123456`     |
 
 > Created via the seed script (`npm run db:seed`). Can be overridden with `ADMIN_EMAIL` / `ADMIN_PASSWORD` in `.env` before seeding.
 
@@ -26,27 +26,29 @@ Built for Programming Hero's **Next Level AI-Driven Software Engineering Bootcam
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Runtime | Node.js, Express.js, TypeScript |
-| Database | PostgreSQL (hosted on Neon) |
-| ORM | Prisma 7 (with `@prisma/adapter-pg` driver adapter) |
-| Auth | JWT (`jsonwebtoken`) + `bcryptjs` |
-| Validation | Zod v4 |
-| Payments | Stripe (Checkout Sessions + Webhooks) |
-| API Docs | Postman Collection |
-| Deployment | Vercel |
+| Layer      | Technology                                          |
+| ---------- | --------------------------------------------------- |
+| Runtime    | Node.js, Express.js, TypeScript                     |
+| Database   | PostgreSQL (hosted on Neon)                         |
+| ORM        | Prisma 7 (with `@prisma/adapter-pg` driver adapter) |
+| Auth       | JWT (`jsonwebtoken`) + `bcryptjs`                   |
+| Validation | Zod v4                                              |
+| Payments   | Stripe (Checkout Sessions + Webhooks)               |
+| API Docs   | Postman Collection                                  |
+| Deployment | Vercel                                              |
 
 ---
 
 ## ✨ Features
 
 **Public**
+
 - Browse all gear with search, filter (category, brand, price), and pagination
 - View gear details with specs and reviews
 - View gear categories
 
 **Customer**
+
 - Register / login
 - Create multi-item rental orders (with date validation and live stock checks)
 - Pay via Stripe Checkout
@@ -55,12 +57,14 @@ Built for Programming Hero's **Next Level AI-Driven Software Engineering Bootcam
 - Leave a review — only for gear actually rented and returned
 
 **Provider**
+
 - Register / login
 - Full CRUD on own gear listings (ownership enforced — providers cannot modify each other's listings)
 - View incoming orders for their gear
 - Move orders through the status flow: `CONFIRMED → PICKED_UP → RETURNED`
 
 **Admin**
+
 - View and manage all users (suspend / activate)
 - View all gear listings and rental orders across the platform
 - Manage gear categories
@@ -97,6 +101,7 @@ prisma/
 ```
 
 Each module follows the same layering:
+
 - **`*.validation.ts`** — Zod schemas for `body` / `query` / `params`
 - **`*.controller.ts`** — HTTP layer only (calls service, shapes response)
 - **`*.service.ts`** — business logic, ownership checks, Prisma queries
@@ -140,6 +145,7 @@ CLIENT_CANCEL_URL=http://localhost:3000/payment/cancel
 ```
 
 Generate a JWT secret:
+
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
@@ -157,6 +163,7 @@ npm run db:seed
 ```bash
 npm run dev
 ```
+
 Server starts at `http://localhost:5000`.
 
 ### 5. (Optional) Test Stripe webhooks locally
@@ -165,6 +172,7 @@ Server starts at `http://localhost:5000`.
 stripe login
 stripe listen --forward-to localhost:5000/api/payments/confirm
 ```
+
 Copy the `whsec_...` value it prints into `STRIPE_WEBHOOK_SECRET` in `.env`.
 
 ---
@@ -174,6 +182,7 @@ Copy the `whsec_...` value it prints into `STRIPE_WEBHOOK_SECRET` in `.env`.
 A full Postman collection is included at `postman/gearup.postman_collection.json`, with a matching environment file at `postman/gearup.postman_environment.json`.
 
 **Import steps:**
+
 1. Postman → Import → select both JSON files
 2. Select the **"GearUp Local"** environment (top-right dropdown)
 3. Run requests top-to-bottom inside the **"1. Auth"** folder first — tokens and IDs are captured automatically into environment variables and reused by later requests
@@ -186,20 +195,22 @@ The collection covers all endpoints plus common error cases (validation errors, 
 ## 🔒 Error Response Format
 
 All errors return a consistent shape:
+
 ```json
 {
   "success": false,
   "message": "Human-readable error message",
-  "errorDetails": { }
+  "errorDetails": {}
 }
 ```
 
 All success responses:
+
 ```json
 {
   "success": true,
   "message": "Human-readable success message",
-  "data": { }
+  "data": {}
 }
 ```
 
@@ -220,14 +231,14 @@ All success responses:
 
 ## 📦 Available Scripts
 
-| Script | Description |
-|---|---|
-| `npm run dev` | Start dev server with hot reload |
-| `npm run build` | Generate Prisma client + bundle for production |
-| `npm run db:generate` | Regenerate Prisma client |
-| `npm run db:migrate` | Run Prisma migrations (dev) |
-| `npm run db:seed` | Seed the admin user |
-| `npm run deploy` | Deploy to Vercel |
+| Script                | Description                                    |
+| --------------------- | ---------------------------------------------- |
+| `npm run dev`         | Start dev server with hot reload               |
+| `npm run build`       | Generate Prisma client + bundle for production |
+| `npm run db:generate` | Regenerate Prisma client                       |
+| `npm run db:migrate`  | Run Prisma migrations (dev)                    |
+| `npm run db:seed`     | Seed the admin user                            |
+| `npm run deploy`      | Deploy to Vercel                               |
 
 ---
 
