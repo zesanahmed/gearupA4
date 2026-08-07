@@ -1,11 +1,11 @@
 import { Router } from "express";
 
-import { authenticate, authorize } from "../../middlewares/auth";
+import { authenticate, authorize } from "../../middlewares/auth.js";
 
-import { validate } from "../../middlewares/validate";
+import { validate } from "../../middlewares/validate.js";
 
-import { gearController } from "./gear.controller";
-import { gearValidation } from "./gear.validation";
+import { gearController } from "./gear.controller.js";
+import { gearValidation } from "./gear.validation.js";
 
 const router = Router();
 

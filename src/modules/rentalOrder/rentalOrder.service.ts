@@ -1,21 +1,21 @@
-import type { Prisma } from "../../generated/prisma/client";
-import prisma from "../../lib/prisma";
-import { ApiError } from "../../utils/ApiError";
+import type { Prisma } from "../../generated/prisma/client.js";
+import prisma from "../../lib/prisma.js";
+import { ApiError } from "../../utils/ApiError.js";
 import {
   buildRentalOrderCreateData,
   calculateRentalDays,
   calculateTotalAmount,
   type ResolvedOrderItem,
-} from "./rentalOrder.mapper";
+} from "./rentalOrder.mapper.js";
 import {
   PROVIDER_ALLOWED_TRANSITIONS,
   CUSTOMER_CANCELLABLE_FROM,
   rentalOrderInclude,
-} from "./rentalOrder.constants";
+} from "./rentalOrder.constants.js";
 import type {
   CreateRentalOrderInput,
   UpdateOrderStatusInput,
-} from "./rentalOrder.validation";
+} from "./rentalOrder.validation.js";
 
 const getOwnOrderOrThrow = async (orderId: string, customerId: string) => {
   const order = await prisma.rentalOrder.findUnique({

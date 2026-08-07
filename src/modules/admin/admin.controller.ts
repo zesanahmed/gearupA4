@@ -1,8 +1,8 @@
 import type { Request, Response } from "express";
-import { catchAsync } from "../../utils/catchAsync";
-import { ApiResponse } from "../../utils/ApiResponse";
-import { adminService } from "./admin.service";
-import type { UpdateUserStatusInput } from "./admin.validation";
+import { catchAsync } from "../../utils/catchAsync.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { adminService } from "./admin.service.js";
+import type { UpdateUserStatusInput } from "./admin.validation.js";
 
 const getAllUsers = catchAsync(async (req: Request, res: Response) => {
   const users = await adminService.getAllUsers();

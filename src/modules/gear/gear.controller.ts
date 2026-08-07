@@ -1,13 +1,13 @@
 import type { Request, Response } from "express";
 
-import { ApiResponse } from "../../utils/ApiResponse";
-import { catchAsync } from "../../utils/catchAsync";
-import { gearService } from "./gear.service";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { catchAsync } from "../../utils/catchAsync.js";
+import { gearService } from "./gear.service.js";
 import type {
   CreateGearInput,
   GetGearQuery,
   UpdateGearInput,
-} from "./gear.validation";
+} from "./gear.validation.js";
 
 const createGear = catchAsync(async (req: Request, res: Response) => {
   const { body } = req.validated as { body: CreateGearInput };

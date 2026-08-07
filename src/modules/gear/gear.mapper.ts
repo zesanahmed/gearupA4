@@ -1,5 +1,5 @@
-import type { Prisma } from "../../generated/prisma/client";
-import type { CreateGearInput, UpdateGearInput } from "./gear.validation";
+import type { Prisma } from "../../generated/prisma/client.js";
+import type { CreateGearInput, UpdateGearInput } from "./gear.validation.js";
 
 /**
  * Build Prisma create input for GearItem

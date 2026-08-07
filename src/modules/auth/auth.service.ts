@@ -1,10 +1,10 @@
 import bcrypt from "bcryptjs";
-import prisma from "../../lib/prisma";
-import config from "../../config";
-import { ApiError } from "../../utils/ApiError";
-import { generateToken } from "../../utils/jwt";
-import type { LoginInput, RegisterInput } from "./auth.validation";
-import { INVALID_CREDENTIALS, userSelect } from "./auth.constants";
+import prisma from "../../lib/prisma.js";
+import config from "../../config/index.js";
+import { ApiError } from "../../utils/ApiError.js";
+import { generateToken } from "../../utils/jwt.js";
+import type { LoginInput, RegisterInput } from "./auth.validation.js";
+import { INVALID_CREDENTIALS, userSelect } from "./auth.constants.js";
 
 const registerUser = async (payload: RegisterInput) => {
   const existingUser = await prisma.user.findUnique({

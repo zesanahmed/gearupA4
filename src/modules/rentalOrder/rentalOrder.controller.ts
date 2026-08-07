@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
-import { catchAsync } from "../../utils/catchAsync";
-import { ApiResponse } from "../../utils/ApiResponse";
-import { rentalOrderService } from "./rentalOrder.service";
+import { catchAsync } from "../../utils/catchAsync.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { rentalOrderService } from "./rentalOrder.service.js";
 import type {
   CreateRentalOrderInput,
   UpdateOrderStatusInput,
-} from "./rentalOrder.validation";
+} from "./rentalOrder.validation.js";
 
 const createRentalOrder = catchAsync(async (req: Request, res: Response) => {
   const { body } = req.validated as { body: CreateRentalOrderInput };

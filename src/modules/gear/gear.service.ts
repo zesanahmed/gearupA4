@@ -1,12 +1,12 @@
-import type { Prisma } from "../../generated/prisma/client";
-import prisma from "../../lib/prisma";
-import { ApiError } from "../../utils/ApiError";
-import { buildCreateGearData, buildUpdateGearData } from "./gear.mapper";
+import type { Prisma } from "../../generated/prisma/client.js";
+import prisma from "../../lib/prisma.js";
+import { ApiError } from "../../utils/ApiError.js";
+import { buildCreateGearData, buildUpdateGearData } from "./gear.mapper.js";
 import type {
   CreateGearInput,
   GetGearQuery,
   UpdateGearInput,
-} from "./gear.validation";
+} from "./gear.validation.js";
 
 const getProviderGearOrThrow = async (gearId: string, providerId: string) => {
   const gear = await prisma.gearItem.findUnique({

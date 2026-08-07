@@ -1,6 +1,6 @@
-import prisma from "../../lib/prisma";
-import { ApiError } from "../../utils/ApiError";
-import type { CreateReviewInput } from "./review.validation";
+import prisma from "../../lib/prisma.js";
+import { ApiError } from "../../utils/ApiError.js";
+import type { CreateReviewInput } from "./review.validation.js";
 
 const createReview = async (customerId: string, payload: CreateReviewInput) => {
   const gearItem = await prisma.gearItem.findUnique({

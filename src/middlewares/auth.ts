@@ -1,7 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
-import { ApiError } from "../utils/ApiError";
-import { verifyToken } from "../utils/jwt";
-import prisma from "../lib/prisma";
+import { ApiError } from "../utils/ApiError.js";
+import { verifyToken } from "../utils/jwt.js";
+import prisma from "../lib/prisma.js";
 
 export const authenticate = async (
   req: Request,

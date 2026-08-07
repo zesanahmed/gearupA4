@@ -1,8 +1,8 @@
-import prisma from "../../lib/prisma";
-import { ApiError } from "../../utils/ApiError";
-import { userSelect } from "../auth/auth.constants";
-import { rentalOrderInclude } from "../rentalOrder/rentalOrder.constants";
-import type { UpdateUserStatusInput } from "./admin.validation";
+import prisma from "../../lib/prisma.js";
+import { ApiError } from "../../utils/ApiError.js";
+import { userSelect } from "../auth/auth.constants.js";
+import { rentalOrderInclude } from "../rentalOrder/rentalOrder.constants.js";
+import type { UpdateUserStatusInput } from "./admin.validation.js";
 
 const getAllUsers = async () => {
   return prisma.user.findMany({

@@ -1,4 +1,4 @@
-import type { Prisma } from "../../generated/prisma/client";
+import type { Prisma } from "../../generated/prisma/client.js";
 
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;
 

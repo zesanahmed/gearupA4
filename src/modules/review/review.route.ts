@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import { reviewValidation } from "./review.validation";
-import { reviewController } from "./review.controller";
-import { authenticate, authorize } from "../../middlewares/auth";
-import { validate } from "../../middlewares/validate";
+import { reviewValidation } from "./review.validation.js";
+import { reviewController } from "./review.controller.js";
+import { authenticate, authorize } from "../../middlewares/auth.js";
+import { validate } from "../../middlewares/validate.js";
 
 const router = Router();
 

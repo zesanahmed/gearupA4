@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
-import { catchAsync } from "../../utils/catchAsync";
-import { ApiResponse } from "../../utils/ApiResponse";
-import { paymentService } from "./payment.service";
-import type { CreatePaymentInput } from "./payment.validation";
-import { ApiError } from "../../utils/ApiError";
+import { catchAsync } from "../../utils/catchAsync.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { paymentService } from "./payment.service.js";
+import type { CreatePaymentInput } from "./payment.validation.js";
+import { ApiError } from "../../utils/ApiError.js";
 
 const createPayment = catchAsync(async (req: Request, res: Response) => {
   const { body } = req.validated as { body: CreatePaymentInput };

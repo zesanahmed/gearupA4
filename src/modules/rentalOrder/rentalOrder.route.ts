@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { validate } from "../../middlewares/validate";
-import { authenticate, authorize } from "../../middlewares/auth";
-import { rentalOrderValidation } from "./rentalOrder.validation";
-import { rentalOrderController } from "./rentalOrder.controller";
+import { validate } from "../../middlewares/validate.js";
+import { authenticate, authorize } from "../../middlewares/auth.js";
+import { rentalOrderValidation } from "./rentalOrder.validation.js";
+import { rentalOrderController } from "./rentalOrder.controller.js";
 
 const router = Router();
 

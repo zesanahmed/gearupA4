@@ -1,6 +1,6 @@
-import prisma from "../../lib/prisma";
-import { ApiError } from "../../utils/ApiError";
-import type { CreateCategoryInput } from "./category.validation";
+import prisma from "../../lib/prisma.js";
+import { ApiError } from "../../utils/ApiError.js";
+import type { CreateCategoryInput } from "./category.validation.js";
 
 const generateSlug = (name: string): string =>
   name

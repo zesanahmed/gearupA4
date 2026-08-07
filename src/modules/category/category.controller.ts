@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import { catchAsync } from "../../utils/catchAsync";
-import { ApiResponse } from "../../utils/ApiResponse";
-import { categoryService } from "./category.service";
+import { catchAsync } from "../../utils/catchAsync.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { categoryService } from "./category.service.js";
 
 const createCategory = catchAsync(async (req: Request, res: Response) => {
   const category = await categoryService.createCategory(req.body);

@@ -1,5 +1,5 @@
-import type { Prisma } from "../../generated/prisma/client";
-import { MS_PER_DAY } from "./rentalOrder.constants";
+import type { Prisma } from "../../generated/prisma/client.js";
+import { MS_PER_DAY } from "./rentalOrder.constants.js";
 
 export interface ResolvedOrderItem {
   gearItemId: string;

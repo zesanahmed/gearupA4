@@ -1,9 +1,9 @@
-import stripe from "../../lib/stripe";
-import prisma from "../../lib/prisma";
-import config from "../../config";
-import { ApiError } from "../../utils/ApiError";
-import { paymentInclude, PAYABLE_ORDER_STATUS } from "./payment.constants";
-import { rentalOrderService } from "../rentalOrder/rentalOrder.service";
+import stripe from "../../lib/stripe.js";
+import prisma from "../../lib/prisma.js";
+import config from "../../config/index.js";
+import { ApiError } from "../../utils/ApiError.js";
+import { paymentInclude, PAYABLE_ORDER_STATUS } from "./payment.constants.js";
+import { rentalOrderService } from "../rentalOrder/rentalOrder.service.js";
 import type Stripe from "stripe";
 
 // ---- Create checkout session ----

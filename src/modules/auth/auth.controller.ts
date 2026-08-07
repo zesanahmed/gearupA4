@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
-import { catchAsync } from "../../utils/catchAsync";
-import { ApiResponse } from "../../utils/ApiResponse";
-import { authService } from "./auth.service";
+import { catchAsync } from "../../utils/catchAsync.js";
+import { ApiResponse } from "../../utils/ApiResponse.js";
+import { authService } from "./auth.service.js";
 
 const register = catchAsync(async (req: Request, res: Response) => {
   const result = await authService.registerUser(req.body);
