@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "prisma generate && tsup",
+    "postinstall": "prisma generate",
+    "build": "prisma generate",
     "deploy": "vercel --prod",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
