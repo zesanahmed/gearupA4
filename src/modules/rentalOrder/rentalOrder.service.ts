@@ -1,4 +1,4 @@
-import type { Prisma } from "../../generated/prisma/client.js";
+import type { GearItemModel } from "../../generated/prisma/models/GearItem.js";
 import prisma from "../../lib/prisma.js";
 import { ApiError } from "../../utils/ApiError.js";
 import {
@@ -44,7 +44,8 @@ const getProviderOrderOrThrow = async (orderId: string, providerId: string) => {
   }
 
   const belongsToProvider = order.items.every(
-    (item) => item.gearItem.providerId === providerId,
+    (item: { gearItem: { providerId: string } }) =>
+      item.gearItem.providerId === providerId,
   );
 
   if (!belongsToProvider) {
@@ -62,7 +63,7 @@ const createRentalOrder = async (
 ) => {
   const gearItemIds = payload.items.map((item) => item.gearItemId);
 
-  const gearItems = await prisma.gearItem.findMany({
+  const gearItems: GearItemModel[] = await prisma.gearItem.findMany({
     where: { id: { in: gearItemIds } },
   });
 
@@ -163,7 +164,8 @@ const getOrderByIdForUser = async (
 
   const isOwner = order.customerId === userId;
   const isFulfillingProvider = order.items.some(
-    (item) => item.gearItem.providerId === userId,
+    (item: { gearItem: { providerId: string } }) =>
+      item.gearItem.providerId === userId,
   );
 
   if (role !== "ADMIN" && !isOwner && !isFulfillingProvider) {
