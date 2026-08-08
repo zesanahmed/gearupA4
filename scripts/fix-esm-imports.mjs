@@ -1,6 +1,8 @@
-// One-time codemod: adds explicit .js (or /index.js for directory imports)
-// to relative imports/exports so the code works with Node.js native ESM.
-// Usage: node fix-esm-imports.mjs
+// Runs automatically after every `prisma generate` (see package.json).
+// Adds explicit .js (or /index.js for directory imports) to every
+// extension-less relative import — needed because the project uses
+// Node.js native ESM ("type": "module"), and both our own TS source
+// AND Prisma's own generated client code omit extensions.
 import {
   readdirSync,
   statSync,
@@ -10,18 +12,23 @@ import {
 } from "fs";
 import { join, extname, dirname, resolve } from "path";
 
+// src/ ধরে পুরো project (আমাদের কোড + generated/prisma দুটোই) কভার করে
 const ROOTS = ["src", "api"];
 const VALID_EXT = [".js", ".json", ".mjs", ".cjs", ".node"];
-const IMPORT_RE = /(from\s+|import\s*\(\s*)(["'])(\.[^"']+)\2/g;
+const IMPORT_RE =
+  /(from\s+|import\s*\(\s*|export\s+[^;]*?from\s+)(["'])(\.[^"']+)\2/g;
 
 function walk(dir, files = []) {
   for (const entry of readdirSync(dir)) {
     const full = join(dir, entry);
     const stat = statSync(full);
     if (stat.isDirectory()) {
-      if (entry === "node_modules" || entry === "generated") continue;
+      if (entry === "node_modules") continue; // এখন আর "generated" বাদ দিচ্ছি না
       walk(full, files);
-    } else if (entry.endsWith(".ts") && !entry.endsWith(".d.ts")) {
+    } else if (
+      (entry.endsWith(".ts") && !entry.endsWith(".d.ts")) ||
+      entry.endsWith(".js") // Prisma generated code সরাসরি .js-ও হতে পারে
+    ) {
       files.push(full);
     }
   }
@@ -72,4 +79,6 @@ for (const root of ROOTS) {
   }
 }
 
-console.log(`\n✅ Modified ${totalChanged} file(s).`);
+console.log(
+  `✅ [fix-esm-imports] Patched ${totalChanged} file(s) for Node ESM compatibility.`,
+);
