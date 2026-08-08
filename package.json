@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "postinstall": "prisma generate",
-    "build": "prisma generate",
+    "postinstall": "prisma generate && node scripts/fix-esm-imports.mjs",
+    "build": "prisma generate && node scripts/fix-esm-imports.mjs",
     "deploy": "vercel --prod",
-    "db:generate": "prisma generate",
+    "db:generate": "prisma generate && node scripts/fix-esm-imports.mjs",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "webhook:stripe": "stripe listen --forward-to localhost:5000/api/payments/confirm"
