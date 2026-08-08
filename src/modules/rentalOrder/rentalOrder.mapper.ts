@@ -1,4 +1,5 @@
 import type { Prisma } from "../../generated/prisma/client.js";
+import type { RentalOrderCreateInput } from "../../generated/prisma/models/RentalOrder.js";
 import { MS_PER_DAY } from "./rentalOrder.constants.js";
 
 export interface ResolvedOrderItem {
@@ -31,7 +32,7 @@ export const buildRentalOrderCreateData = (
   endDate: Date,
   items: ResolvedOrderItem[],
   totalAmount: number,
-): Prisma.RentalOrderCreateInput => ({
+): RentalOrderCreateInput => ({
   customer: { connect: { id: customerId } },
   startDate,
   endDate,

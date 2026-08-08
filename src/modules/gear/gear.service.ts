@@ -1,4 +1,4 @@
-import type { Prisma } from "../../generated/prisma/client.js";
+import type { GearItemWhereInput } from "../../generated/prisma/models/GearItem.js";
 import prisma from "../../lib/prisma.js";
 import { ApiError } from "../../utils/ApiError.js";
 import { buildCreateGearData, buildUpdateGearData } from "./gear.mapper.js";
@@ -108,7 +108,7 @@ const getAllGear = async (query: GetGearQuery) => {
     limit,
   } = query;
 
-  const where: Prisma.GearItemWhereInput = {
+  const where: GearItemWhereInput = {
     ...(category && {
       category: {
         slug: category,

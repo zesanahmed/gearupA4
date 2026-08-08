@@ -1,4 +1,7 @@
-import type { Prisma } from "../../generated/prisma/client.js";
+import type {
+  GearItemCreateInput,
+  GearItemUpdateInput,
+} from "../../generated/prisma/models/GearItem.js";
 import type { CreateGearInput, UpdateGearInput } from "./gear.validation.js";
 
 /**
@@ -7,7 +10,7 @@ import type { CreateGearInput, UpdateGearInput } from "./gear.validation.js";
 export const buildCreateGearData = (
   providerId: string,
   payload: CreateGearInput,
-): Prisma.GearItemCreateInput => ({
+): GearItemCreateInput => ({
   provider: {
     connect: {
       id: providerId,
@@ -46,7 +49,7 @@ export const buildCreateGearData = (
  */
 export const buildUpdateGearData = (
   payload: UpdateGearInput,
-): Prisma.GearItemUpdateInput => ({
+): GearItemUpdateInput => ({
   ...(payload.categoryId !== undefined && {
     category: {
       connect: {

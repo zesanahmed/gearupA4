@@ -1,4 +1,4 @@
-import type { Prisma } from "../../generated/prisma/client.js";
+import type { RentalOrderInclude } from "../../generated/prisma/models/RentalOrder.js";
 
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
@@ -20,4 +20,4 @@ export const rentalOrderInclude = {
     },
   },
   payment: true,
-} satisfies Prisma.RentalOrderInclude;
+} satisfies RentalOrderInclude;
